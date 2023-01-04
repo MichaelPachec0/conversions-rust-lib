@@ -15,10 +15,18 @@
 
 use std::time::Duration;
 
+/// Trait for converting a value to a `Duration`.
 pub trait ToDuration<T>
     where
         u64: TryFrom<T>,
 {
+    /// Converts `self` to a `Duration`.
+    ///
+    /// # Returns
+    /// A `Result` containing a new `Duration` instance if `T` was converted.
+    ///
+    /// # Errors
+    /// If `T` overflows, return `TryFrom<T>::Error`.
     fn to_duration(self) -> Result<Duration, <u64 as TryFrom<T>>::Error>;
 }
 
