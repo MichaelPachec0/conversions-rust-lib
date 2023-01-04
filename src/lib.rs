@@ -17,8 +17,8 @@ use std::time::Duration;
 
 /// Trait for converting a value to a `Duration`.
 pub trait ToDuration<T>
-    where
-        u64: TryFrom<T>,
+where
+    u64: TryFrom<T>,
 {
     /// Converts `self` to a `Duration`.
     ///
@@ -31,8 +31,8 @@ pub trait ToDuration<T>
 }
 
 impl<T> ToDuration<T> for T
-    where
-        u64: TryFrom<T>,
+where
+    u64: TryFrom<T>,
 {
     fn to_duration(self) -> Result<Duration, <u64 as TryFrom<T>>::Error> {
         Ok(Duration::from_secs(u64::try_from(self)?))
@@ -48,7 +48,10 @@ mod tests {
         let initial = 5;
         let solution = initial.to_duration()?;
         let expected = Duration::from_secs(5);
-        assert_eq!(solution, expected, "SOLUTION {solution:?} DOES NOT EQUAL EXPECTED {expected:?}");
+        assert_eq!(
+            solution, expected,
+            "SOLUTION {solution:?} DOES NOT EQUAL EXPECTED {expected:?}"
+        );
         Ok(())
     }
 }
